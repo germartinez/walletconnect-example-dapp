@@ -1,6 +1,7 @@
 {
   "name": "walletconnect-example-dapp",
   "version": "1.0.0-beta.33",
+  "homepage": "https://germartinez.github.io/walletconnect-example-dapp",
   "private": true,
   "keywords": [
     "walletconnect",
@@ -9,13 +10,14 @@
     "crypto"
   ],
   "author": "WalletConnect <walletconnect.org>",
-  "homepage": "https://walletconnect.org",
   "license": "LGPL-3.0",
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,7 @@
     "axios": "^0.18.0",
     "bignumber.js": "^8.0.2",
     "ethereumjs-util": "^6.1.0",
+    "gh-pages": "^2.1.1",
     "prop-types": "^15.6.2",
     "qr-image": "^3.2.0",
     "react": "^16.7.0",
