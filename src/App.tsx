@@ -637,7 +637,7 @@ class App extends React.Component<any, any> {
       }
     };
 
-    // eth_signTypedData params
+    // wallet_signTypedData params
     const msgParams = [address, typedData];
 
     try {
@@ -647,8 +647,16 @@ class App extends React.Component<any, any> {
       // toggle pending request indicator
       this.setState({ pendingRequest: true });
 
+      // Build custom request
+      const customRequest = {
+        id: 1234,
+        jsonrpc: '2.0',
+        method: 'wallet_signTypedData',
+        params: msgParams
+      }
+
       // sign typed data
-      const result = await walletConnector.signTypedData(msgParams);
+      const result = await walletConnector.sendCustomRequest(customRequest);
 
       // // verify signature
       // const signer = recoverPublicKey(result, typedData);
@@ -656,7 +664,7 @@ class App extends React.Component<any, any> {
 
       // format displayed result
       const formattedResult = {
-        method: "eth_signTypedData",
+        method: "wallet_signTypedData",
         address,
         // signer,
         // verified,
@@ -727,7 +735,7 @@ class App extends React.Component<any, any> {
                       {"eth_signTransaction"}
                     </STestButton>
 
-                    <STestButton disabled left onClick={this.testCustomRequest}>
+                    <STestButton left onClick={this.testCustomRequest}>
                       {"Custom Request"}
                     </STestButton>
 
@@ -739,8 +747,8 @@ class App extends React.Component<any, any> {
                       {"personal_sign"}
                     </STestButton>
 
-                    <STestButton disabled left onClick={this.testSignTypedData}>
-                      {"eth_signTypedData"}
+                    <STestButton left onClick={this.testSignTypedData}>
+                      {"wallet_signTypedData"}
                     </STestButton>
                   </STestButtonContainer>
                 </Column>
